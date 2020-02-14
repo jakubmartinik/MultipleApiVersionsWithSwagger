@@ -14,22 +14,38 @@ namespace RestApi.Example.Utils.Swagger
         public SwaggerSettings()
         {
             Name = "REST API Example";
-            Info = new OpenApiInfo
-            {
-                Title = "REST API Example",
-                Description = "REST API Versions"                
-            };
+            Title = "REST API Example";
+            Description = "REST API Versions";
+
         }
+
+        /// <summary>
+        /// Gets or sets Title.
+        /// </summary>
+        public string Title { get;  }
+
+        /// <summary>
+        /// Gets or sets Description.
+        /// </summary>
+        public string Description { get; }
 
         /// <summary>
         /// Gets or sets document Name.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets or sets swagger Info.
         /// </summary>
-        public OpenApiInfo Info { get; set; }
+        public OpenApiInfo GetOpenApiInfo(string version, bool isDeprecated)
+        {
+            return new OpenApiInfo
+            {
+                Description = Description + (isDeprecated ? " - DEPRECATED" : ""),
+                Title = Title,
+                Version = version
+            };
+        }
 
         /// <summary>
         /// Gets or sets RoutePrefix.

@@ -51,14 +51,7 @@ namespace RestApi.Example.Utils.Swagger
         {
             foreach (var description in provider.ApiVersionDescriptions)
             {
-                settings.Info.Version = description.ApiVersion.ToString();
-
-                if (description.IsDeprecated)
-                {
-                    settings.Info.Description += " - DEPRECATED";
-                }
-
-                options.SwaggerDoc(description.GroupName, settings.Info);
+                options.SwaggerDoc(description.GroupName, settings.GetOpenApiInfo(description.ApiVersion.ToString(), description.IsDeprecated));
             }
         }
 
